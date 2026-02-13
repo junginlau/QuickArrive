@@ -156,17 +156,19 @@ menu:
 
 ## 安裝
 
-## 從 GitHub 下載並自行打包
+### 從 GitHub 下載並自行打包
 
 1. 下載原始碼：
   - 直接下載 ZIP（GitHub 頁面 -> Code -> Download ZIP），或
-  - 使用 git：`git clone <repo_url>`
+  - 使用 git：`git clone https://github.com/junginlau/QuickArrive.git`
 2. 進入專案資料夾。
 3. 使用 Gradle 打包：
   - Windows：`gradlew.bat build`
   - Linux/Mac：`./gradlew build`
 4. 打包完成後，jar 位置在 `build/libs/`。
 5. 將 jar 放入伺服器的 `plugins` 資料夾並重啟。
+
+### 直接安裝
 
 1. 下載 `quickarrive-1.0.0.jar`
 2. 放入伺服器的 `plugins` 資料夾
