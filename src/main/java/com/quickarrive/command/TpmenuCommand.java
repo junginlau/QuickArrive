@@ -26,6 +26,7 @@ public class TpmenuCommand implements CommandExecutor, TabCompleter {
 
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    String base = "/" + command.getName().toLowerCase();
     if (args.length == 0) {
       if (!(sender instanceof Player player)) {
         sender.sendMessage(plugin.withPrefix(plugin.message("player-only")));
@@ -86,7 +87,7 @@ public class TpmenuCommand implements CommandExecutor, TabCompleter {
           return true;
         }
         if (args.length < 2) {
-          sender.sendMessage("/tpmenu setpoint <name>");
+          sender.sendMessage(base + " setpoint <name>");
           return true;
         }
         String name = args[1];
@@ -100,7 +101,7 @@ public class TpmenuCommand implements CommandExecutor, TabCompleter {
           return true;
         }
         if (args.length < 2) {
-          sender.sendMessage("/tpmenu delpoint <name>");
+          sender.sendMessage(base + " delpoint <name>");
           return true;
         }
         String name = args[1];
@@ -115,8 +116,25 @@ public class TpmenuCommand implements CommandExecutor, TabCompleter {
         sender.sendMessage(locationStore.describeLocations(plugin));
         return true;
       }
+      case "reload" -> {
+        if (command.getName().equalsIgnoreCase("tpmenu")) {
+          sender.sendMessage(plugin.withPrefix(plugin.message("reload-use-qa")));
+          return true;
+        }
+        if (!sender.hasPermission("quickarrive.admin")) {
+          sender.sendMessage(plugin.withPrefix(plugin.message("no-permission")));
+          return true;
+        }
+        plugin.reloadAll();
+        sender.sendMessage(plugin.withPrefix(plugin.message("reload-done")));
+        return true;
+      }
       default -> {
-        sender.sendMessage("/tpmenu [admin|give|setpoint|delpoint|points]");
+        if (command.getName().equalsIgnoreCase("tpmenu")) {
+          sender.sendMessage("/tpmenu [admin|give|setpoint|delpoint|points]");
+        } else {
+          sender.sendMessage(base + " [admin|give|setpoint|delpoint|points|reload]");
+        }
         return true;
       }
     }
@@ -131,6 +149,9 @@ public class TpmenuCommand implements CommandExecutor, TabCompleter {
       options.add("setpoint");
       options.add("delpoint");
       options.add("points");
+      if (!command.getName().equalsIgnoreCase("tpmenu")) {
+        options.add("reload");
+      }
       return options;
     }
     if (args.length == 2 && args[0].equalsIgnoreCase("delpoint")) {

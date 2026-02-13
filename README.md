@@ -3,7 +3,7 @@
 一款全面的 Minecraft 伺服器傳送管理插件，提供玩家互傳、傳送點管理、傳送門整合與黑名單系統。
 遊戲版本要求 Java 1.20.1
 伺服器端 Paper端
-可與 EssentialX，AncientGates，Multiverse等傳送插件聯動
+可與 EssentialX，AncientGates等傳送插件聯動
 
 ## 功能特色
 
@@ -39,6 +39,7 @@
 | 指令 | 說明 | 權限 |
 |------|------|------|
 | `/tpmenu` | 開啟主選單 | `quickarrive.use` |
+| `/quickarrive` | 開啟主選單（可用 `/qa` 代替） | `quickarrive.use` |
 | `/tpa <玩家>` | 請求傳送到該玩家 | `quickarrive.use` |
 | `/tpahere <玩家>` | 請求該玩家傳送過來 | `quickarrive.use` |
 | `/tpaccept` | 接受傳送請求 | `quickarrive.use` |
@@ -53,6 +54,7 @@
 | `/tpmenu delpoint <名稱>` | 刪除傳送點 | `quickarrive.admin` |
 | `/tpmenu give [玩家]` | 給予傳送選單工具 | `quickarrive.menu.give` |
 | `/tpmenu points` | 列出所有傳送點 | `quickarrive.admin` |
+| `/qa reload` | 重新載入設定與資料 | `quickarrive.admin` |
 
 ## 權限
 

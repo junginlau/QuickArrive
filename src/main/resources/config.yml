@@ -6,6 +6,9 @@ teleport:
   cancel-on-damage: false
 bypass:
   players: []
+updater:
+  enabled: true
+  check-interval-minutes: 60
 menu:
   title: "&0QuickArrive"
   admin-title: "&0QuickArrive 管理員面板"
@@ -57,6 +60,8 @@ messages:
   no-pending: "&c沒有待處理的傳送。"
   menu-opened: "&a已開啟傳送選單。"
   admin-opened: "&a已開啟管理員選單。"
+  reload-done: "&a已重新載入設定。"
+  reload-use-qa: "&e請使用 &a/qa reload &e來重新載入設定。"
   tool-given: "&a已給予傳送選單工具。"
   location-set: "&a已建立傳送點 {location}。"
   location-removed: "&a已移除傳送點 {location}。"
@@ -81,4 +86,5 @@ messages:
   target-not-found: "&c找不到玩家 {player}。"
   tpa-usage: "&c用法: /tpa <玩家>"
   tpahere-usage: "&c用法: /tpahere <玩家>"
+  update-available: "&e發現新版本 &a{version}&e，下載：&b{url}"
 locations: {}

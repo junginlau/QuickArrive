@@ -11,6 +11,7 @@ import com.quickarrive.store.LocationStore;
 import com.quickarrive.store.PlayerDataStore;
 import com.quickarrive.teleport.EssentialsCommandInterceptor;
 import com.quickarrive.teleport.TeleportManager;
+import com.quickarrive.update.Updater;
 import java.util.Map;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,6 +26,7 @@ public class QuickArrivePlugin extends JavaPlugin {
   private EssentialsHomeProvider essentialsHomeProvider;
   private ChatInputManager chatInputManager;
   private EssentialsCommandInterceptor essentialsCommandInterceptor;
+  private Updater updater;
 
   @Override
   public void onEnable() {
@@ -39,11 +41,13 @@ public class QuickArrivePlugin extends JavaPlugin {
     teleportManager = new TeleportManager(this, playerDataStore);
     menuManager = new MenuManager(this, teleportManager, playerDataStore, gateStore, gateSettingsStore, essentialsHomeProvider, chatInputManager);
     essentialsCommandInterceptor = new EssentialsCommandInterceptor(this, teleportManager);
+    updater = new Updater(this);
 
     getServer().getPluginManager().registerEvents(teleportManager, this);
     getServer().getPluginManager().registerEvents(menuManager, this);
     getServer().getPluginManager().registerEvents(chatInputManager, this);
     getServer().getPluginManager().registerEvents(essentialsCommandInterceptor, this);
+    getServer().getPluginManager().registerEvents(updater, this);
 
     TpmenuCommand tpmenuCommand = new TpmenuCommand(this, menuManager, locationStore);
     TeleportDecisionCommand decisionCommand = new TeleportDecisionCommand(this, teleportManager);
@@ -52,12 +56,24 @@ public class QuickArrivePlugin extends JavaPlugin {
       getCommand("tpmenu").setExecutor(tpmenuCommand);
       getCommand("tpmenu").setTabCompleter(tpmenuCommand);
     }
+    if (getCommand("quickarrive") != null) {
+      getCommand("quickarrive").setExecutor(tpmenuCommand);
+      getCommand("quickarrive").setTabCompleter(tpmenuCommand);
+    }
     if (getCommand("tpaccept") != null) {
       getCommand("tpaccept").setExecutor(decisionCommand);
     }
     if (getCommand("tpdeny") != null) {
       getCommand("tpdeny").setExecutor(decisionCommand);
     }
+
+    updater.start();
+  }
+
+  public void reloadAll() {
+    reloadConfig();
+    playerDataStore.reload();
+    gateSettingsStore.reload();
   }
 
   public String colorize(String text) {
