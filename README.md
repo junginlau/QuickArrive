@@ -14,6 +14,7 @@
 - **傳送點管理** - 每位玩家最多 2 個傳送點（包含 EssentialsX 的 /home）
 - **傳送門整合** - 直接讀取 AncientGates 的傳送門資料
 - **黑名單系統** - 玩家可阻擋特定玩家的傳送請求
+- **更新提醒** - 自動檢查 GitHub 新版本並通知管理員
 - **圖形化選單** - 完整的 GUI 操作介面，所有功能都能透過選單執行
 
 ### ⚡ 傳送控制
@@ -125,6 +126,10 @@ teleport:
 bypass:
   players: []                # 繞過確認的玩家名單
 
+updater:
+  enabled: true              # 啟用更新檢查
+  check-interval-minutes: 60 # 檢查間隔（分鐘）
+
 menu:
   title: "&0QuickArrive"     # 選單標題
   size: 54                   # 選單大小（9、18、27、36、45、54）
@@ -173,6 +178,7 @@ menu:
 #### Gradle Wrapper 使用方式
 
 - Windows：`gradlew.bat build`
+- Windows（簡化）：`build.bat`
 - Linux/Mac：`./gradlew build`
 - 停止背景 Gradle 程序：`./gradlew --stop`
 
