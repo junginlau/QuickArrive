@@ -17,6 +17,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -41,6 +45,7 @@ public class MenuManager implements Listener {
   private static final int SLOT_BACK = 45;
   private static final int SLOT_CLOSE = 49;
   private static final int SLOT_ADMIN = 53;
+  private static final int SLOT_GITHUB = 46;
   private static final int SLOT_PREV = 0;
   private static final int SLOT_NEXT = 7;
   private static final int SLOT_BLACKLIST = 8;
@@ -316,6 +321,10 @@ public class MenuManager implements Listener {
       inventory.setItem(SLOT_NEXT, createButton(Material.ARROW, "&a下一頁"));
     }
     inventory.setItem(SLOT_WORLDS, createButton(Material.GRASS_BLOCK, plugin.getConfig().getString("menu.buttons.worlds", "Worlds")));
+    String githubUrl = getGithubUrl();
+    if (!githubUrl.isEmpty()) {
+      inventory.setItem(SLOT_GITHUB, createGithubItem());
+    }
     inventory.setItem(SLOT_BACK, createButton(Material.ARROW, plugin.getConfig().getString("menu.buttons.back", "Back")));
     inventory.setItem(SLOT_CLOSE, createButton(Material.BARRIER, plugin.getConfig().getString("menu.buttons.close", "Close")));
 
@@ -395,13 +404,24 @@ public class MenuManager implements Listener {
       material = Material.BLACK_STAINED_GLASS_PANE;
     }
     ItemStack filler = new ItemStack(material);
-    ItemMeta meta = filler.getItemMeta();
-    if (meta != null) {
-      meta.setDisplayName(" ");
-      filler.setItemMeta(meta);
+    ItemStack edge = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+    ItemMeta fillerMeta = filler.getItemMeta();
+    if (fillerMeta != null) {
+      fillerMeta.setDisplayName(" ");
+      filler.setItemMeta(fillerMeta);
+    }
+    ItemMeta edgeMeta = edge.getItemMeta();
+    if (edgeMeta != null) {
+      edgeMeta.setDisplayName(" ");
+      edge.setItemMeta(edgeMeta);
     }
     for (int i = 0; i < inventory.getSize(); i++) {
-      inventory.setItem(i, filler);
+      int row = i / 9;
+      if (row == 0 || row == (inventory.getSize() / 9) - 1) {
+        inventory.setItem(i, edge);
+      } else {
+        inventory.setItem(i, filler);
+      }
     }
   }
 
@@ -539,6 +559,20 @@ public class MenuManager implements Listener {
       List<String> lore = new ArrayList<>();
       lore.add(plugin.colorize("&7環境: &f" + world.getEnvironment().name()));
       lore.add(plugin.colorize("&7左鍵傳送至世界重生點"));
+      meta.setLore(lore);
+      item.setItemMeta(meta);
+    }
+    return item;
+  }
+
+  private ItemStack createGithubItem() {
+    ItemStack item = new ItemStack(Material.PLAYER_HEAD);
+    SkullMeta meta = (SkullMeta) item.getItemMeta();
+    if (meta != null) {
+      meta.setOwningPlayer(Bukkit.getOfflinePlayer("MHF_Github"));
+      meta.setDisplayName(plugin.colorize(plugin.getConfig().getString("menu.buttons.github", "GitHub")));
+      List<String> lore = new ArrayList<>();
+      lore.add(plugin.colorize("&7點擊開啟 GitHub"));
       meta.setLore(lore);
       item.setItemMeta(meta);
     }
@@ -821,6 +855,11 @@ public class MenuManager implements Listener {
         player.openInventory(buildWorldsMenu(0));
         return;
       }
+      if (slot == SLOT_GITHUB) {
+        sendGithubLink(player);
+        player.closeInventory();
+        return;
+      }
       if (slot == SLOT_BACK) {
         openMainMenu(player);
         return;
@@ -1028,6 +1067,23 @@ public class MenuManager implements Listener {
       return player.getName();
     }
     return uuid.toString();
+  }
+
+  private String getGithubUrl() {
+    String url = plugin.getConfig().getString("menu.github-url", "");
+    return url != null ? url.trim() : "";
+  }
+
+  private void sendGithubLink(Player player) {
+    String url = getGithubUrl();
+    if (url.isEmpty()) {
+      return;
+    }
+    String message = plugin.message("github-link", Map.of("url", url));
+    TextComponent text = new TextComponent(message);
+    text.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url));
+    text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(url).create()));
+    player.spigot().sendMessage(text);
   }
 
   private void requestInput(Player player, String prompt, Consumer<String> handler) {

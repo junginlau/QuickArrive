@@ -21,12 +21,14 @@ menu:
   worlds-title: "&0QuickArrive 世界"
   size: 54
   background-material: BLACK_STAINED_GLASS_PANE
+  github-url: "https://github.com/junginlau/QuickArrive"
   buttons:
     players: "&b玩家"
     homes: "&a傳點"
     gates: "&d傳送門"
     admin: "&e管理面板"
     worlds: "&b世界"
+    github: "&bGitHub"
     close: "&c關閉"
     back: "&7返回"
     blacklist: "&c黑名單"
@@ -87,4 +89,5 @@ messages:
   tpa-usage: "&c用法: /tpa <玩家>"
   tpahere-usage: "&c用法: /tpahere <玩家>"
   update-available: "&e發現新版本 &a{version}&e，下載：&b{url}"
+  github-link: "&bGitHub: &f{url}"
 locations: {}
