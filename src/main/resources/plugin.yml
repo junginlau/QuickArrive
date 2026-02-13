@@ -1,0 +1,28 @@
+name: QuickArrive
+main: com.quickarrive.QuickArrivePlugin
+version: 1.0.0
+api-version: 1.20
+commands:
+  tpmenu:
+    description: Open QuickArrive menu and admin tools.
+    usage: /tpmenu [admin|give|setpoint|delpoint|points]
+    permission: quickarrive.use
+  tpaccept:
+    description: Accept a teleport request or system teleport.
+    usage: /tpaccept
+    permission: quickarrive.use
+  tpdeny:
+    description: Deny a teleport request or system teleport.
+    usage: /tpdeny
+    permission: quickarrive.use
+permissions:
+  quickarrive.use:
+    default: true
+  quickarrive.admin:
+    default: op
+  quickarrive.bypass:
+    default: op
+  quickarrive.menu.give:
+    default: op
+  quickarrive.menu.admin:
+    default: op

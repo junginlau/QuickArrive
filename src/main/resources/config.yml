@@ -1,0 +1,84 @@
+teleport:
+  timeout-seconds: 60
+  delay-seconds: 3
+  intercept-essentialsx: true
+  cancel-on-move: false
+  cancel-on-damage: false
+bypass:
+  players: []
+menu:
+  title: "&0QuickArrive"
+  admin-title: "&0QuickArrive 管理員面板"
+  players-title: "&0QuickArrive 玩家"
+  homes-title: "&0QuickArrive 傳點"
+  gates-title: "&0QuickArrive 傳送門"
+  blacklist-title: "&0QuickArrive 黑名單"
+  gate-admin-title: "&0QuickArrive 傳送門管理"
+  gate-edit-title: "&0編輯傳送門"
+  worlds-title: "&0QuickArrive 世界"
+  size: 54
+  background-material: BLACK_STAINED_GLASS_PANE
+  buttons:
+    players: "&b玩家"
+    homes: "&a傳點"
+    gates: "&d傳送門"
+    admin: "&e管理面板"
+    worlds: "&b世界"
+    close: "&c關閉"
+    back: "&7返回"
+    blacklist: "&c黑名單"
+  tool:
+    enabled: true
+    material: COMPASS
+    name: "&bQuickArrive 選單"
+    lore:
+      - "&7右鍵點擊以開啟。"
+messages:
+  prefix: "&b[QuickArrive]&r "
+  no-permission: "&c你沒有權限。"
+  player-only: "&c只有玩家可以使用此指令。"
+  request-sent: "&a已送出傳送請求給 {player}。"
+  request-received: "&e{player} 想要傳送 &f{direction}&e。輸入 &a/tpaccept &e或 &c/tpdeny"
+  request-received-chat: "&e玩家 &6{player} &e請求傳送&f{direction}&e："
+  request-accept-button: "&a&l[接受傳送]"
+  request-deny-button: "&c&l[拒絕傳送]"
+  request-pending: "&c對方已有待處理的傳送請求。"
+  request-blocked: "&c對方拒絕你的傳送請求。"
+  request-expired: "&c傳送請求已過期。"
+  request-denied: "&c你拒絕了傳送請求。"
+  request-canceled: "&c傳送請求已取消。"
+  request-accepted: "&a傳送請求已接受。"
+  teleport-delay: "&e傳送將在 {seconds} 秒後開始..."
+  teleport-delay-canceled: "&c傳送已取消（移動或受傷）。"
+  self-confirm: "&e偵測到傳送，請輸入 &a/tpaccept &e或 &c/tpdeny &e( {seconds} 秒內 )"
+  self-expired: "&c此次傳送已過期。"
+  self-denied: "&c你拒絕了此次傳送。"
+  self-accepted: "&a已開始傳送。"
+  no-pending: "&c沒有待處理的傳送。"
+  menu-opened: "&a已開啟傳送選單。"
+  admin-opened: "&a已開啟管理員選單。"
+  tool-given: "&a已給予傳送選單工具。"
+  location-set: "&a已建立傳送點 {location}。"
+  location-removed: "&a已移除傳送點 {location}。"
+  location-missing: "&c找不到傳送點 {location}。"
+  location-teleport: "&a傳送到 {location}。"
+  cannot-teleport-self: "&c不能對自己發送傳送請求。"
+  menu-empty: "&c目前沒有可用的傳送項目。"
+  admin-toggled: "&a傳送點 {location} 目前狀態: {state}"
+  blacklist-added: "&a已將 {player} 加入黑名單。"
+  blacklist-removed: "&a已將 {player} 移出黑名單。"
+  home-set: "&a已設定傳點 {home}。"
+  home-removed: "&a已移除傳點 {home}。"
+  home-renamed: "&a已更新傳點名稱為 {home}。"
+  home-limit: "&c傳點已達上限（最多 2 個，含 /home）。"
+  gates-missing: "&c找不到 AncientGates 的 gates.json。"
+  gate-enabled: "&a已開放傳送門 {gate}。"
+  gate-disabled: "&c已關閉傳送門 {gate}。"
+  gate-teleport: "&a傳送到傳送門 {gate}。"
+  world-teleport: "&a傳送到世界 {world}。"
+  input-canceled: "&c已取消輸入。"
+  input-invalid: "&c輸入格式不正確。"
+  target-not-found: "&c找不到玩家 {player}。"
+  tpa-usage: "&c用法: /tpa <玩家>"
+  tpahere-usage: "&c用法: /tpahere <玩家>"
+locations: {}
