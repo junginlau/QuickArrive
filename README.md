@@ -168,6 +168,17 @@ menu:
 4. 打包完成後，jar 位置在 `build/libs/`。
 5. 將 jar 放入伺服器的 `plugins` 資料夾並重啟。
 
+#### Gradle Wrapper 使用方式
+
+- Windows：`gradlew.bat build`
+- Linux/Mac：`./gradlew build`
+- 停止背景 Gradle 程序：`./gradlew --stop`
+
+#### GitHub Actions 自動打包
+
+- 每次推送或 PR 會自動執行 `./gradlew build`
+- 設定檔位置：`.github/workflows/build.yml`
+
 ### 直接安裝
 
 1. 下載 `quickarrive-1.0.0.jar`
