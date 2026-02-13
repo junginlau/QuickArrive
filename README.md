@@ -260,7 +260,7 @@ A: 確認 `plugins/AncientGates/gates.json` 存在，並在管理員面板開放
 
 ## 授權
 
-此插件為自訂開發，請勿未經許可重新分發。
+此專案採用 GPLv3 授權，詳情請見 LICENSE。
 
 ## 支援
 
